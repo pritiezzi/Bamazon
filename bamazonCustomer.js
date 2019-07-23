@@ -10,7 +10,7 @@ var connection = mysql.createConnection({
 
   // Your password
   password: "password",
-  database: "bamazon"
+  database: "BamazonDB"
 })
 
 
@@ -59,8 +59,9 @@ function runSearch() {
 
 function listItems() {
   console.log("\n")
-  var query = "SELECT item_id, product_name, department_name, price, stock_quantity FROM products"
+  var query = "SELECT * FROM products"
   connection.query(query, function (err, res) {
+    // console.log(res);
     for (var i = 0; i < res.length; i++) {
 
       console.log("ID: " + res[i].item_id + "  Name: " + res[i].product_name + " Department: " + res[i].department_name + "  $" + res[i].price + " Available: " + res[i].stock_quantity);
@@ -75,6 +76,7 @@ function shouldIBuy() {
   inquirer
     .prompt({
       name: "buy",
+      
       type: "list",
       message: "Do you want to buy something?",
       choices: [
